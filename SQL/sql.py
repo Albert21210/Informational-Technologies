@@ -1,10 +1,9 @@
 import sqlite3
 
-# Создаем подключение к базе данных в памяти
 conn = sqlite3.connect(':memory:')
 cursor = conn.cursor()
 
-# 1. Создание таблиц согласно схеме 
+# Создание таблиц согласно схеме 
 cursor.executescript('''
 CREATE TABLE уровень_обучения (
     id_уровня INTEGER PRIMARY KEY,
@@ -65,7 +64,6 @@ def run_query(title, query):
     cursor.execute(query)
     rows = cursor.fetchall()
     colnames = [desc[0] for desc in cursor.description]
-    # Форматированный вывод
     print(f"{' | '.join(f'{name:<20}' for name in colnames)}")
     print("-" * (23 * len(colnames)))
     for row in rows:
